@@ -1,4 +1,4 @@
-const C="mushaf-v4",H=["api.alquran.cloud","fonts.googleapis.com","fonts.gstatic.com"];
+const C="mushaf-v5",H=["api.alquran.cloud","fonts.googleapis.com","fonts.gstatic.com"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(C).then(c=>c.addAll(["./","index.html","styles.css","app.js","manifest.json","icon.svg"])));self.skipWaiting()});
 self.addEventListener("activate",e=>e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim())));
 self.addEventListener("fetch",e=>{

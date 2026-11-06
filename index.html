@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>المصحف الشريف</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#1f6b4a"></head>
+<body>
+<header><div class="bar">
+<button class="ic" id="back" aria-label="رجوع" hidden>›</button>
+<svg class="lg" viewBox="0 0 48 48" aria-hidden="true"><rect width="48" height="48" rx="12" fill="var(--g)"/><path d="M24 17c-3-2-7-3-12-3v20c5 0 9 1 12 3 3-2 7-3 12-3V14c-5 0-9 1-12 3z" fill="#fff"/><path d="M24 17v20" stroke="var(--g)" stroke-width="1.6"/><path d="M24 4l1.8 3.6 4 .6-2.9 2.8.7 4L24 13.100l-3.600 1.900.7-4-2.900-2.800 4-.6z" fill="var(--gold)"/></svg>
+<h1 id="ttl">المصحف الشريف</h1>
+<div class="hfs" id="hfs" hidden><button class="ic" id="fm" aria-label="تصغير الخط">أ-</button><button class="ic" id="fp" aria-label="تكبير الخط">أ+</button></div>
+<button id="fab" hidden aria-label="تابع من مكاني"><span class="f-l">تابع من مكاني</span><span class="f-s">🔖 تابع</span></button>
+<button class="ic" id="dua" aria-label="أدعيتي" title="أدعيتي">🤲</button>
+<button class="ic" id="th" aria-label="تبديل الوضع الليلي">◐</button>
+</div></header>
+
+<main id="home">
+<div class="hero" id="hero" hidden><small>تابع من حيث توقفت</small><b id="hn"></b><button id="hb">أكمل القراءة</button></div>
+<button class="duac" id="pd" hidden aria-label="فتح أدعيتي"><small>🤲 دعائي</small><p id="pdt"></p></button>
+<div class="tabs" id="tabs" role="tablist"><button class="tab" data-t="0" role="tab" aria-selected="true">السور</button><button class="tab" data-t="1" role="tab" aria-selected="false">الأجزاء</button><button class="tab" data-t="2" role="tab" aria-selected="false">الأحزاب</button><button class="tab" data-t="3" role="tab" aria-selected="false">مكتبتي</button></div>
+<input type="search" id="q" placeholder="ابحث باسم السورة أو رقمها" aria-label="بحث">
+<div class="chips" id="chips">
+<button class="chip" data-f="" aria-pressed="true">الكل</button>
+<button class="chip" data-f="m" aria-pressed="false">مكية</button>
+<button class="chip" data-f="d" aria-pressed="false">مدنية</button>
+</div>
+<button class="nv" id="qs" hidden></button>
+<ul id="list"></ul>
+<section id="lib" hidden></section>
+<p class="msg" id="empty" hidden>لا توجد سورة بهذا الاسم. جرّب كتابة جزء آخر من الاسم.</p>
+</main>
+
+<main id="read" hidden>
+<div class="rh"><h2 id="rn"></h2><p id="rm"></p></div>
+<div class="rcw"><label for="rc">القارئ</label><select id="rc"><optgroup label="تلاوة كاملة"><option value="sobhi">إسلام صبحي</option><option value="kurdi">رعد الكردي</option></optgroup><optgroup label="آية بآية (للحفظ)"><option value="ar.alafasy">مشاري العفاسي</option><option value="ar.mahermuaiqly">ماهر المعيقلي</option><option value="ar.abdulbasitmurattal">عبد الباسط عبد الصمد</option><option value="ar.husary">محمود خليل الحصري</option><option value="ar.minshawi">محمد صديق المنشاوي</option><option value="ar.saoodshuraym">سعود الشريم</option><option value="ar.abdurrahmaansudais">عبد الرحمن السديس</option><option value="ar.hudhaify">علي الحذيفي</option><option value="ar.ahmedajamy">أحمد العجمي</option><option value="ar.muhammadjibreel">محمد جبريل</option></optgroup></select></div>
+<p class="msg" id="am" hidden></p>
+<audio id="au" controls preload="none"></audio>
+<div class="pb" id="pb" hidden>
+<button class="chip" id="pp">▶ تشغيل</button>
+<button class="chip" id="ap">الآية السابقة</button>
+<button class="chip" id="an">الآية التالية</button>
+<label class="opt" for="rp"><span>كرّر الآية</span><select id="rp"><option>1</option><option>3</option><option>5</option><option>10</option></select></label>
+<label class="opt" for="hd"><span>أخفِ النص للحفظ</span><input type="checkbox" id="hd" class="sw" role="switch"></label>
+<label class="opt" for="lp"><span>حلقة الحفظ (من–إلى)</span><input type="checkbox" id="lp" class="sw" role="switch"></label>
+<label class="opt" for="rf"><span>من آية</span><select id="rf"></select></label>
+<label class="opt" for="rt"><span>إلى آية</span><select id="rt"></select></label>
+</div>
+<div class="pb" id="px">
+<label class="opt" for="spd"><span>السرعة</span><select id="spd"><option value="0.75">٠٫٧٥×</option><option value="1" selected>١×</option><option value="1.25">١٫٢٥×</option><option value="1.5">١٫٥×</option></select></label>
+<label class="opt" for="slt"><span>مؤقت النوم</span><select id="slt"><option value="0">إيقاف</option><option value="15">١٥ دقيقة</option><option value="30">٣٠ دقيقة</option><option value="60">ساعة</option></select></label>
+</div>
+<div class="bs" id="bs">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+<div class="txt" id="tx"></div>
+<button class="nv dnb" id="dn">✓ أتممت قراءة هذه السورة</button>
+<div class="pg"><button class="nv" id="pv">السورة السابقة</button><button class="nv" id="nx">السورة التالية</button></div>
+</main>
+
+<div class="sheet" id="sh" role="dialog" aria-label="تفسير الآية" hidden>
+<div class="sh-h"><b id="sa"></b><select id="tf" aria-label="التفسير"><option value="ar.muyassar">التفسير الميسر</option><option value="ar.jalalayn">تفسير الجلالين</option></select><button class="ic" id="sx" aria-label="إغلاق">×</button></div>
+<p class="aytxt" id="st"></p>
+<p class="tfs" id="sf"></p>
+<div class="nb"><textarea id="nt" rows="2" maxlength="300" placeholder="ملاحظتي على هذه الآية…" aria-label="ملاحظة على الآية"></textarea><span class="er" id="nerr" role="alert"></span></div>
+<div class="sh-b"><button class="nv" id="sv">حفظ مكاني هنا</button><button class="nv" id="sl">استمع من هنا</button><button class="nv" id="sp">الآية السابقة</button><button class="nv" id="sn">الآية التالية</button><button class="nv" id="fv">☆ أضف للمفضلة</button><button class="nv" id="ns">حفظ الملاحظة</button><button class="nv" id="cp">نسخ الآية</button><button class="nv" id="shr">مشاركة</button></div>
+</div>
+
+<div class="ov" id="dd" role="dialog" aria-modal="true" aria-labelledby="dtt" hidden>
+<div class="dbox">
+<div class="sh-h"><b id="dtt">🤲 أدعيتي</b><button class="ic" id="dx" aria-label="إغلاق">×</button></div>
+<label class="dlb" for="dt" id="dlb">اكتب الدعاء الذي تريده</label>
+<textarea id="dt" rows="4" maxlength="500" dir="auto" placeholder="اللهم ..." aria-describedby="dc derr"></textarea>
+<div class="dm"><span id="dc">٠ / ٥٠٠</span><span id="derr" class="er" role="alert"></span></div>
+<div class="sh-b"><button class="nv" id="ds">حفظ الدعاء</button><button class="nv" id="dcx" hidden>إلغاء التعديل</button></div>
+<p class="dh">أدعيتي المحفوظة</p>
+<ul id="dl"></ul>
+<p class="msg" id="de">لا توجد أدعية محفوظة بعد.</p>
+</div></div>
+
+<script src="app.js"></script>
+</body>
+</html>

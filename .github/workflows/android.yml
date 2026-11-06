@@ -9,6 +9,12 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+      - name: Organize files
+        run: |
+          mkdir -p www assets
+          for f in index.html styles.css app.js sw.js manifest.json icon.svg; do [ -f "$f" ] && mv "$f" www/; done
+          for f in icon-only.png icon-foreground.png icon-background.png; do [ -f "$f" ] && mv "$f" assets/; done
+          ls -R www assets
       - uses: actions/setup-node@v4
         with:
           node-version: 20
